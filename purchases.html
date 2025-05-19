@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المشتريات السريعة - اسكندويتش</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c1e5a;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.active {
+            color: white !important;
+            border-bottom: 2px solid white;
+        }
+        
+        .page-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+            padding: 15px 20px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #1e1645;
+            border-color: #1e1645;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            transition: all 0.3s;
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            transition: all 0.3s;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #c82333;
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+        
+        .table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .purchase-filters {
+            margin-bottom: 20px;
+        }
+        
+        .purchase-summary {
+            margin-bottom: 30px;
+        }
+        
+        .summary-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .summary-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .summary-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .summary-label {
+            color: #6c757d;
+        }
+        
+        .input-group-text {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .scan-input {
+            margin-bottom: 20px;
+        }
+        
+        .delete-confirm-modal .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .delete-confirm-modal .modal-footer {
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-box-open me-2"></i>
+                اسكندويتش - نظام إدارة المخزون
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home nav-icon"></i>الرئيسية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="branches.html">
+                            <i class="fas fa-store nav-icon"></i>الفروع
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">
+                            <i class="fas fa-hamburger nav-icon"></i>المنتجات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="inventory.html">
+                            <i class="fas fa-clipboard-list nav-icon"></i>جرد المخزون
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="waste.html">
+                            <i class="fas fa-trash nav-icon"></i>الويستات الشهرية
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="purchasesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-shopping-cart nav-icon"></i>المشتريات
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="purchasesDropdown">
+                            <li><a class="dropdown-item active" href="purchases.html">المشتريات السريعة</a></li>
+                            <li><a class="dropdown-item" href="invoices.html">الفواتير</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cost.html">
+                            <i class="fas fa-calculator nav-icon"></i>حساب التكلفة المباشرة
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h1 class="mb-2"><i class="fas fa-shopping-cart me-2"></i> المشتريات السريعة</h1>
+                    <p class="lead">إدارة المشتريات وطلب المنتجات</p>
+                </div>
+                <div class="col-lg-4 text-lg-end d-flex align-items-center justify-content-lg-end">
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addPurchaseModal">
+                        <i class="fas fa-plus-circle me-2"></i>إضافة طلب جديد
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="container">
+        <!-- Scan Input -->
+        <div class="row scan-input">
+            <div class="col-md-8 mb-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="مسح باركود المنتج..." id="scanInput">
+                    <button class="btn btn-primary" type="button" onclick="scanProduct()">
+                        <i class="fas fa-barcode me-2"></i>مسح
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-outline-primary me-2" onclick="toggleCamera()">
+                        <i class="fas fa-camera me-1"></i> فتح الكاميرا
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Camera Preview (Hidden by default) -->
+        <div class="row mb-4" id="cameraPreview" style="display: none;">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <video id="video" width="100%" height="300" style="border: 1px solid #ddd; border-radius: 5px;"></video>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-danger" onclick="toggleCamera()">
+                                <i class="fas fa-times me-1"></i> إغلاق الكاميرا
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Purchase Filters -->
+        <div class="row purchase-filters">
+            <div class="col-md-4 mb-3">
+                <label for="supplierFilter" class="form-label">المورد</label>
+                <select class="form-select" id="supplierFilter" onchange="applyFilters()">
+                    <option value="all">جميع الموردين</option>
+                    <option value="1">شركة الغذاء الطازج</option>
+                    <option value="2">مؤسسة الخير للتوريدات</option>
+                    <option value="3">مصنع المشروبات الوطني</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="statusFilter" class="form-label">الحالة</label>
+                <select class="form-select" id="statusFilter" onchange="applyFilters()">
+                    <option value="all">جميع الحالات</option>
+                    <option value="pending">قيد الانتظار</option>
+                    <option value="ordered">تم الطلب</option>
+                    <option value="received">تم الاستلام</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="purchaseDate" class="form-label">تاريخ الطلب</label>
+                <input type="date" class="form-control" id="purchaseDate" value="2025-05-18">
+            </div>
+        </div>
+
+        <!-- Purchase Summary -->
+        <div class="row purchase-summary">
+            <div class="col-md-3 mb-3">
+                <div class="summary-card">
+                    <i class="fas fa-shopping-basket summary-icon"></i>
+                    <div class="summary-value" id="totalItems">24</div>
+                    <div class="summary-label">إجمالي المنتجات</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="summary-card">
+                    <i class="fas fa-money-bill-wave summary-icon"></i>
+                    <div class="summary-value" id="totalCost">3,250.00 ريال</div>
+                    <div class="summary-label">إجمالي التكلفة</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="summary-card">
+                    <i class="fas fa-clock summary-icon"></i>
+                    <div class="summary-value" id="pendingItems">8</div>
+                    <div class="summary-label">منتجات قيد الانتظار</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="summary-card">
+                    <i class="fas fa-check-circle summary-icon"></i>
+                    <div class="summary-value" id="receivedItems">16</div>
+                    <div class="summary-label">منتجات تم استلامها</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Purchases Table -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">قائمة المشتريات</h5>
+                <div>
+                    <button class="btn btn-sm btn-outline-light me-2" onclick="printPurchases()">
+                        <i class="fas fa-print me-1"></i> طباعة
+                    </button>
+                    <button class="btn btn-sm btn-outline-light" onclick="exportPurchases()">
+                        <i class="fas fa-file-export me-1"></i> تصدير
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>اسم المنتج</th>
+                                <th>المورد</th>
+                                <th>الكمية</th>
+                                <th>سعر الوحدة</th>
+                                <th>الإجمالي</th>
+                                <th>تاريخ الطلب</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="purchasesTableBody">
+                            <!-- Table content will be dynamically generated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Purchase Modal -->
+    <div class="modal fade" id="addPurchaseModal" tabindex="-1" aria-labelledby="addPurchaseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="addPurchaseModalLabel">إضافة طلب جديد</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addPurchaseForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="productName" class="form-label">اسم المنتج</label>
+                                <input type="text" class="form-control" id="productName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="supplier" class="form-label">المورد</label>
+                                <select class="form-select" id="supplier" required>
+                                    <option value="">اختر المورد</option>
+                                    <option value="شركة الغذاء الطازج">شركة الغذاء الطازج</option>
+                                    <option value="مؤسسة الخير للتوريدات">مؤسسة الخير للتوريدات</option>
+                                    <option value="مصنع المشروبات الوطني">مصنع المشروبات الوطني</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="quantity" class="form-label">الكمية</label>
+                                <input type="number" class="form-control" id="quantity" min="1" value="1" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="unitPrice" class="form-label">سعر الوحدة</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="unitPrice" step="0.01" required>
+                                    <span class="input-group-text">ريال</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="status" class="form-label">الحالة</label>
+                                <select class="form-select" id="status" required>
+                                    <option value="pending">قيد الانتظار</option>
+                                    <option value="ordered">تم الطلب</option>
+                                    <option value="received">تم الاستلام</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">ملاحظات</label>
+                            <textarea class="form-control" id="notes" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="addPurchase()">إضافة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade delete-confirm-modal" id="deletePurchaseModal" tabindex="-1" aria-labelledby="deletePurchaseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deletePurchaseModalLabel">تأكيد الحذف</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>هل أنت متأكد من رغبتك في حذف هذا الطلب؟</p>
+                    <p class="text-danger">هذا الإجراء لا يمكن التراجع عنه.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">حذف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <p class="mb-0">© 2025 اسكندويتش - نظام إدارة المخزون. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Global variables
+        let purchasesData = [];
+        let productsData = []; // Will store products data
+        let deletedProducts = []; // Will store deleted product IDs
+        
+        // Load data from localStorage or initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPurchasesData();
+            loadProductsData();
+            loadDeletedProducts();
+            
+            // Set up scan input event listener
+            document.getElementById('scanInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    scanProduct();
+                }
+            });
+            
+            // Set up delete confirmation modal
+            const deletePurchaseModal = document.getElementById('deletePurchaseModal');
+            deletePurchaseModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const purchaseId = button.getAttribute('data-purchase-id');
+                document.getElementById('confirmDeleteBtn').setAttribute('data-purchase-id', purchaseId);
+            });
+            
+            document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+                const purchaseId = parseInt(this.getAttribute('data-purchase-id'));
+                deletePurchaseConfirmed(purchaseId);
+            });
+        });
+        
+        // Load purchases data from localStorage
+        function loadPurchasesData() {
+            const storedData = localStorage.getItem('purchasesData');
+            if (storedData) {
+                purchasesData = JSON.parse(storedData);
+            } else {
+                // Initialize with sample data if not exists
+                purchasesData = [
+                    {
+                        id: 1,
+                        productName: "ساندويتش دجاج",
+                        supplier: "شركة الغذاء الطازج",
+                        quantity: 50,
+                        unitPrice: 5.25,
+                        total: 262.50,
+                        date: "18/05/2025",
+                        status: "pending",
+                        notes: ""
+                    },
+                    {
+                        id: 2,
+                        productName: "ساندويتش لحم",
+                        supplier: "شركة الغذاء الطازج",
+                        quantity: 30,
+                        unitPrice: 7.50,
+                        total: 225.00,
+                        date: "18/05/2025",
+                        status: "ordered",
+                        notes: ""
+                    },
+                    {
+                        id: 3,
+                        productName: "كولا",
+                        supplier: "مصنع المشروبات الوطني",
+                        quantity: 100,
+                        unitPrice: 1.50,
+                        total: 150.00,
+                        date: "17/05/2025",
+                        status: "received",
+                        notes: ""
+                    },
+                    {
+                        id: 4,
+                        productName: "بطاطس مقلية",
+                        supplier: "مؤسسة الخير للتوريدات",
+                        quantity: 80,
+                        unitPrice: 2.75,
+                        total: 220.00,
+                        date: "16/05/2025",
+                        status: "received",
+                        notes: ""
+                    }
+                ];
+                savePurchasesData();
+            }
+            
+            // Display purchases
+            displayPurchases();
+        }
+        
+        // Load products data from localStorage
+        function loadProductsData() {
+            const storedData = localStorage.getItem('productsData');
+            if (storedData) {
+                productsData = JSON.parse(storedData);
+            } else {
+                // Initialize with sample data if not exists
+                productsData = [
+                    { id: 1, name: "ساندويتش دجاج", category: "ساندويتشات", price: 7.50, unit: "قطعة" },
+                    { id: 2, name: "ساندويتش لحم", category: "ساندويتشات", price: 9.75, unit: "قطعة" },
+                    { id: 3, name: "ساندويتش فلافل", category: "ساندويتشات", price: 4.25, unit: "قطعة" },
+                    { id: 4, name: "كولا", category: "مشروبات", price: 2.00, unit: "علبة" },
+                    { id: 5, name: "بطاطس مقلية", category: "إضافات", price: 3.25, unit: "كيس" },
+                    { id: 6, name: "كنافة", category: "حلويات", price: 6.50, unit: "قطعة" }
+                ];
+                localStorage.setItem('productsData', JSON.stringify(productsData));
+            }
+        }
+        
+        // Load deleted products from localStorage
+        function loadDeletedProducts() {
+            const storedData = localStorage.getItem('deletedProducts');
+            if (storedData) {
+                deletedProducts = JSON.parse(storedData);
+                
+                // Remove deleted products from purchases
+                removeDeletedProductsFromPurchases();
+            } else {
+                deletedProducts = [];
+                localStorage.setItem('deletedProducts', JSON.stringify(deletedProducts));
+            }
+        }
+        
+        // Remove deleted products from purchases
+        function removeDeletedProductsFromPurchases() {
+            if (deletedProducts.length === 0) return;
+            
+            let dataChanged = false;
+            
+            // Filter out purchases for deleted products
+            const originalLength = purchasesData.length;
+            purchasesData = purchasesData.filter(purchase => {
+                // Find product by name
+                const product = productsData.find(p => p.name === purchase.productName);
+                return !product || !deletedProducts.includes(product.id);
+            });
+            
+            if (originalLength !== purchasesData.length) {
+                dataChanged = true;
+                savePurchasesData();
+                // Refresh the view
+                displayPurchases();
+            }
+        }
+        
+        // Save purchases data to localStorage
+        function savePurchasesData() {
+            localStorage.setItem('purchasesData', JSON.stringify(purchasesData));
+            
+            // Update inventory data if needed
+            updateInventoryBasedOnPurchases();
+        }
+        
+        // Update inventory data based on purchases
+        function updateInventoryBasedOnPurchases() {
+            // This function would update inventory data based on purchase changes
+            // For demonstration, we'll just log that it would happen
+            console.log("Inventory data would be updated based on purchase changes");
+            
+            // In a real implementation, this would:
+            // 1. Update inventory levels for received items
+            // 2. Save to localStorage
+        }
+        
+        // Display purchases based on filters
+        function displayPurchases() {
+            const tableBody = document.getElementById('purchasesTableBody');
+            tableBody.innerHTML = '';
+            
+            // Get filtered data
+            const filteredPurchases = getFilteredPurchases();
+            
+            if (filteredPurchases.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="9" class="text-center">لا توجد مشتريات مطابقة للفلتر</td>
+                `;
+                tableBody.appendChild(row);
+                
+                // Update summary with zeros
+                updateSummary([]);
+                return;
+            }
+            
+            filteredPurchases.forEach(purchase => {
+                const statusClass = getStatusClass(purchase.status);
+                const statusText = getStatusText(purchase.status);
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${purchase.id}</td>
+                    <td>${purchase.productName}</td>
+                    <td>${purchase.supplier}</td>
+                    <td>${purchase.quantity}</td>
+                    <td>${purchase.unitPrice.toFixed(2)} ريال</td>
+                    <td>${purchase.total.toFixed(2)} ريال</td>
+                    <td>${purchase.date}</td>
+                    <td><span class="badge ${statusClass}">${statusText}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-warning me-1" onclick="editPurchase(${purchase.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deletePurchaseModal" data-purchase-id="${purchase.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            // Update summary
+            updateSummary(filteredPurchases);
+        }
+        
+        // Get filtered purchases based on current filters
+        function getFilteredPurchases() {
+            const supplierFilter = document.getElementById('supplierFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            
+            return purchasesData.filter(purchase => {
+                // Check supplier filter
+                if (supplierFilter !== 'all') {
+                    const supplierMap = {
+                        '1': 'شركة الغذاء الطازج',
+                        '2': 'مؤسسة الخير للتوريدات',
+                        '3': 'مصنع المشروبات الوطني'
+                    };
+                    
+                    if (purchase.supplier !== supplierMap[supplierFilter]) {
+                        return false;
+                    }
+                }
+                
+                // Check status filter
+                if (statusFilter !== 'all' && purchase.status !== statusFilter) {
+                    return false;
+                }
+                
+                return true;
+            });
+        }
+        
+        // Apply filters
+        function applyFilters() {
+            displayPurchases();
+        }
+        
+        // Get status class for badge
+        function getStatusClass(status) {
+            switch (status) {
+                case 'pending':
+                    return 'bg-warning';
+                case 'ordered':
+                    return 'bg-info';
+                case 'received':
+                    return 'bg-success';
+                default:
+                    return 'bg-secondary';
+            }
+        }
+        
+        // Get status text
+        function getStatusText(status) {
+            switch (status) {
+                case 'pending':
+                    return 'قيد الانتظار';
+                case 'ordered':
+                    return 'تم الطلب';
+                case 'received':
+                    return 'تم الاستلام';
+                default:
+                    return 'غير معروف';
+            }
+        }
+        
+        // Update purchase summary
+        function updateSummary(purchases) {
+            const totalItems = purchases.reduce((sum, purchase) => sum + purchase.quantity, 0);
+            const totalCost = purchases.reduce((sum, purchase) => sum + purchase.total, 0);
+            const pendingItems = purchases
+                .filter(purchase => purchase.status === 'pending')
+                .reduce((sum, purchase) => sum + purchase.quantity, 0);
+            const receivedItems = purchases
+                .filter(purchase => purchase.status === 'received')
+                .reduce((sum, purchase) => sum + purchase.quantity, 0);
+            
+            document.getElementById('totalItems').textContent = totalItems;
+            document.getElementById('totalCost').textContent = totalCost.toFixed(2) + ' ريال';
+            document.getElementById('pendingItems').textContent = pendingItems;
+            document.getElementById('receivedItems').textContent = receivedItems;
+        }
+        
+        // Add new purchase
+        function addPurchase() {
+            const productName = document.getElementById('productName').value;
+            const supplier = document.getElementById('supplier').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const unitPrice = parseFloat(document.getElementById('unitPrice').value);
+            const status = document.getElementById('status').value;
+            const notes = document.getElementById('notes').value;
+            
+            // Validate form
+            if (!productName || !supplier || isNaN(quantity) || isNaN(unitPrice) || !status) {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+                return;
+            }
+            
+            // Calculate total
+            const total = quantity * unitPrice;
+            
+            // Get today's date in DD/MM/YYYY format
+            const today = new Date();
+            const formattedDate = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+            
+            // Generate new ID (max ID + 1)
+            const newId = purchasesData.length > 0 ? Math.max(...purchasesData.map(p => p.id)) + 1 : 1;
+            
+            // Create new purchase object
+            const newPurchase = {
+                id: newId,
+                productName,
+                supplier,
+                quantity,
+                unitPrice,
+                total,
+                date: formattedDate,
+                status,
+                notes
+            };
+            
+            // Add to purchases data
+            purchasesData.push(newPurchase);
+            
+            // Save and refresh display
+            savePurchasesData();
+            displayPurchases();
+            
+            // Close modal and reset form
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addPurchaseModal'));
+            modal.hide();
+            document.getElementById('addPurchaseForm').reset();
+            
+            // Show success message
+            alert('تمت إضافة الطلب بنجاح');
+        }
+        
+        // Edit purchase
+        function editPurchase(purchaseId) {
+            const purchase = purchasesData.find(p => p.id === purchaseId);
+            if (purchase) {
+                // For this demo, we'll just show an alert
+                // In a real app, this would open a modal with the purchase data
+                alert(`تعديل الطلب ${purchaseId} (هذه الوظيفة قيد التطوير)`);
+            } else {
+                alert('الطلب غير موجود');
+            }
+        }
+        
+        // Delete purchase (confirmation)
+        function deletePurchaseConfirmed(purchaseId) {
+            // Find purchase index
+            const purchaseIndex = purchasesData.findIndex(p => p.id === purchaseId);
+            
+            if (purchaseIndex !== -1) {
+                // Remove from array
+                purchasesData.splice(purchaseIndex, 1);
+                
+                // Save and refresh display
+                savePurchasesData();
+                displayPurchases();
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('deletePurchaseModal'));
+                modal.hide();
+                
+                // Show success message
+                alert('تم حذف الطلب بنجاح');
+            } else {
+                alert('الطلب غير موجود');
+            }
+        }
+        
+        // Scan product
+        function scanProduct() {
+            const scanInput = document.getElementById('scanInput');
+            const barcode = scanInput.value.trim();
+            
+            if (barcode) {
+                // In a real app, this would look up the barcode
+                // For demo, we'll just use the first digit as the product ID
+                const productId = parseInt(barcode[0]);
+                
+                if (!isNaN(productId) && productId > 0 && productId <= 6) {
+                    // Find product
+                    const product = productsData.find(p => p.id === productId);
+                    
+                    if (product && !deletedProducts.includes(productId)) {
+                        // Open add purchase modal and pre-fill with product info
+                        document.getElementById('productName').value = product.name;
+                        document.getElementById('unitPrice').value = product.price;
+                        
+                        // Show modal
+                        const modal = new bootstrap.Modal(document.getElementById('addPurchaseModal'));
+                        modal.show();
+                    } else {
+                        alert('المنتج غير موجود أو تم حذفه');
+                    }
+                } else {
+                    alert('باركود غير صالح أو منتج غير موجود');
+                }
+                
+                // Clear input
+                scanInput.value = '';
+                scanInput.focus();
+            }
+        }
+        
+        // Toggle camera
+        function toggleCamera() {
+            const cameraPreview = document.getElementById('cameraPreview');
+            const video = document.getElementById('video');
+            
+            if (cameraPreview.style.display === 'none') {
+                cameraPreview.style.display = 'block';
+                
+                // Start camera
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    navigator.mediaDevices.getUserMedia({ video: true })
+                        .then(function(stream) {
+                            video.srcObject = stream;
+                            video.play();
+                        })
+                        .catch(function(error) {
+                            console.error("Camera error: ", error);
+                            alert("لا يمكن الوصول إلى الكاميرا");
+                            cameraPreview.style.display = 'none';
+                        });
+                } else {
+                    alert("الكاميرا غير مدعومة في هذا المتصفح");
+                    cameraPreview.style.display = 'none';
+                }
+            } else {
+                cameraPreview.style.display = 'none';
+                
+                // Stop camera
+                if (video.srcObject) {
+                    const tracks = video.srcObject.getTracks();
+                    tracks.forEach(track => track.stop());
+                    video.srcObject = null;
+                }
+            }
+        }
+        
+        // Print purchases
+        function printPurchases() {
+            window.print();
+        }
+        
+        // Export purchases
+        function exportPurchases() {
+            const filteredPurchases = getFilteredPurchases();
+            const csvContent = [
+                ['#', 'اسم المنتج', 'المورد', 'الكمية', 'سعر الوحدة', 'الإجمالي', 'تاريخ الطلب', 'الحالة', 'ملاحظات'],
+                ...filteredPurchases.map(purchase => [
+                    purchase.id,
+                    purchase.productName,
+                    purchase.supplier,
+                    purchase.quantity,
+                    purchase.unitPrice + ' ريال',
+                    purchase.total + ' ريال',
+                    purchase.date,
+                    getStatusText(purchase.status),
+                    purchase.notes
+                ])
+            ];
+            
+            const csvString = csvContent.map(row => row.join(',')).join('\n');
+            const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            link.setAttribute('href', url);
+            link.setAttribute('download', `مشتريات_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Listen for product deletion events
+        window.addEventListener('productDeleted', function(e) {
+            const productId = e.detail.productId;
+            console.log('Product deleted event received in purchases page:', productId);
+            
+            // Remove purchases for this product
+            removeDeletedProductsFromPurchases();
+        });
+        
+        // Listen for invoice deletion events
+        window.addEventListener('invoiceDeleted', function(e) {
+            const invoiceId = e.detail.invoiceId;
+            console.log('Invoice deleted event received in purchases page:', invoiceId);
+            
+            // In a real implementation, this would update purchases related to the deleted invoice
+        });
+    </script>
+</body>
+</html>
